@@ -7,12 +7,31 @@ function timeGenerator() {
     let curHour = curTime.getHours();
     let curMinute = curTime.getMinutes();
     let curSecond = curTime.getSeconds();
+    let amPmConvertor;
 
+    // Adjusting the 12 Hours time
+    if(curHour >= 12) {
+        amPmConvertor = 'PM';
+    } else {
+        amPmConvertor = 'AM';
+    }
+
+    // convert 24 hours timeline to 12 hours
+    if(curHour > 12) {
+        curHour = curHour -12;
+    } else if (curHour <= 9) {
+        curHour = '0' + curHour;
+    } else {
+        curHour;
+    }
+    // 
     const timeTable = `
     <span>${curHour}:</span>
     <span>${curMinute}:</span>
     <span>${curSecond}</span>
+    <span>${amPmConvertor}</span>
     `;
+
     clock.innerHTML = timeTable;
 }
 
