@@ -8,7 +8,7 @@ function timeGenerator() {
     let curSecond = curTime.getSeconds();
     let amPmConvertor = (curHour >= 12) ? 'PM' : 'AM';
 
-    
+
     if(curHour > 12) {
         curHour = curHour -12;
     } else if (curHour <= 9) {
@@ -28,10 +28,8 @@ function timeGenerator() {
     } else {
         curSecond;
     }
-     
-    const timeTable = `${curHour}:${curMinute}:${curSecond} ${amPmConvertor}`;
 
-    clock.innerText = timeTable;
+    clock.innerText = `${curHour}:${curMinute}:${curSecond} ${amPmConvertor}`;
 }
 
  const months = ["January","February","March","April","May","June","July", "August","September","October","November","December"]; 
@@ -44,9 +42,7 @@ function dateGenerator() {
     const curDate = exactDate.getDate();
     const curDay = daysOfWeek[exactDate.getDay()];
 
-    const dateHolder = `${curDay}, ${curMonth} ${curDate} ${curYear}`;
-
-    date.innerText = dateHolder;
+    date.innerText = `${curDay}, ${curMonth} ${curDate} ${curYear}`;
 }
 
 setInterval(timeGenerator,0);
