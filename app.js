@@ -1,22 +1,14 @@
 const clock = document.getElementById('clock');
 const date = document.getElementById('date');
 
-// create function (timeGenerator) to get current time: Hour, minutes, seconds!
 function timeGenerator() {
     const curTime = new Date();
     let curHour = curTime.getHours();
     let curMinute = curTime.getMinutes();
     let curSecond = curTime.getSeconds();
-    let amPmConvertor;
+    let amPmConvertor = (curHour >= 12) ? 'PM' : 'AM';
 
-    // Adjusting the 12 Hours time
-    if(curHour >= 12) {
-        amPmConvertor = 'PM';
-    } else {
-        amPmConvertor = 'AM';
-    }
-
-    // convert 24 hours timeline to 12 hours
+    
     if(curHour > 12) {
         curHour = curHour -12;
     } else if (curHour <= 9) {
@@ -24,25 +16,38 @@ function timeGenerator() {
     } else {
         curHour;
     }
-    // 
-    const timeTable = `
-    <span>${curHour}:</span>
-    <span>${curMinute}:</span>
-    <span>${curSecond}</span>
-    <span>${amPmConvertor}</span>
-    `;
 
-    clock.innerHTML = timeTable;
+    if (curMinute <= 9) {
+        curMinute = '0' + curMinute;
+    } else {
+        curMinute;
+    }
+
+    if (curSecond <= 9) {
+        curSecond = '0' + curSecond;
+    } else {
+        curSecond;
+    }
+     
+    const timeTable = `${curHour}:${curMinute}:${curSecond} ${amPmConvertor}`;
+
+    clock.innerText = timeTable;
 }
 
-// Create function (dateGenerator) to get current Date: day, Month, year!
+ const months = ["January","February","March","April","May","June","July", "August","September","October","November","December"]; 
+ const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"];
+
 function dateGenerator() {
-    const currentDate = new Date().toDateString();
-    const dateHolder = `
-    <span>${currentDate}</span>
-    `
-    date.innerHTML = dateHolder;
+    const exactDate = new Date();
+    const curYear = exactDate.getFullYear();
+    const curMonth = months[exactDate.getMonth()];
+    const curDate = exactDate.getDate();
+    const curDay = daysOfWeek[exactDate.getDay()];
+
+    const dateHolder = `${curDay}, ${curMonth} ${curDate} ${curYear}`;
+
+    date.innerText = dateHolder;
 }
 
-setInterval(timeGenerator,1000);
+setInterval(timeGenerator,0);
 dateGenerator();
